@@ -4,19 +4,22 @@ import './App.css';
 import 'jsonwebtoken';
 
 function readmeLogin(){
-  const sign = require('jsonwebtoken').sign;
-  const user = {
-    name: 'Dilip',
-    email: 'dilip@piedpiper.com',
-    
+  const jwt = require('jsonwebtoken');
+
+// User being logged into ReadMe
+const user = {
+  name: 'Dilip',
+  email: 'dilip@piedpiper.com',
+  
     // User's API Key
-    apiKey: 'yNNzaCNeLB41RmMBY10GFhiba6p0DvM7',
-  };
+    apiKey: "yNNzaCNeLB41RmMBY10GFhiba6p0DvM7",
+};
 
-  const auth_token = sign(user, 'jOWAYRJT1nwbSuRQF4Or');
-  const readmeUrl = 'https://imibot.readme.io/v1.0';
+const authToken = jwt.sign(user, 'jOWAYRJT1nwbSuRQF4Or');
+const readmeUrl = 'https://docs.imibot.ai/v1.0';
 
-  console.log(`${readmeUrl}?auth_token=${auth_token}`)
+// Redirect your user to this URL to log them in
+console.log(`${readmeUrl}?auth_token=${authToken}`);
 };
 
 function App() {
