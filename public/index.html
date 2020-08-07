@@ -40,5 +40,59 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    <div id="divicw" data-bind="810b77ee-7568-11ea-842a-06c5deadccda" data-org=""></div><script src="https://attachuk.imi.chat/widget/js/imichatinit.js"></script>
+    <div
+      id="divicw"
+      data-bind="810b77ee-7568-11ea-842a-06c5deadccda"
+      data-org=""
+    ></div>
+    <script>
+      var i = {
+        t: function (t) {
+          var e = "https://attachuk.imi.chat/widget/js/imichatinit.js";
+          try {
+            var o = new XMLHttpRequest();
+            o.onreadystatechange = function () {
+              if (this.readyState == 4) {
+                var t = document.getElementById("divicw");
+                if (this.status == 0) {
+                  i.o(t);
+                  return;
+                }
+                var e = document.createElement("script");
+                e.innerHTML = this.responseText;
+                t.parentNode.insertBefore(e, t.nextSibling);
+              }
+            };
+            o.open("GET", e, true);
+            o.send();
+          } catch (s) {
+            console.error(s);
+          }
+        },
+        o: function (t) {
+          t.insertAdjacentHTML(
+            "afterend",
+            '<iframe id="tls_al_frm" frameborder="0" style="overflow: hidden;height: 208px;width: 394px;position: fixed;display: block;right: 48px;bottom: 12px;z-index: 99999; display:none;"></iframe>'
+          );
+          var e = document.getElementById("tls_al_frm");
+          var o =
+            e.contentWindow || e.contentDocument.document || e.contentDocument;
+          o.document.open();
+          o.document.write("");
+          o.document.close();
+          e.style.display = "block";
+          window.addEventListener("message", function (t) {
+            if (t.data.action == "close_tls_alert") {
+              i.s();
+            }
+          });
+        },
+        s: function () {
+          var t = document.getElementById("tls_al_frm");
+          t.remove();
+        },
+      };
+      i.t(function (t) {});
+    </script>
+  </body>
 </html>
